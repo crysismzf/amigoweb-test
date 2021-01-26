@@ -2,28 +2,17 @@
 export class Validation {
 
     validationName(text) {
-        return text.length > 13
+        let reg = /^[А-Яа-я -]+$/i
+        return reg.test(text)
     }
 
     validationPhone(text) {
-        let reg = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/;
+        let reg = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){11}(\s*)?$/;
          return reg.test(text)
     }
 
     validationEmail(text) {
         let reg = /.+@.+\..+/i;
         return reg.test(text)
-    }
-
-    notEmpty(state) {
-        if (state.name === "") {
-            return true
-        }
-        if (state.phone === "") {
-            return true
-        }
-        if (state.email === "") {
-            return true
-        }
     }
 }

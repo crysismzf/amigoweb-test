@@ -10,6 +10,7 @@ class SignIn extends React.Component {
             name: "",
             phone: "",
             email: "",
+            selectedLanguage: "",
             errors: true,
             openSelectList: false
         }
@@ -17,7 +18,33 @@ class SignIn extends React.Component {
             name: false,
             phone: false,
             email: false,
+            selectedLanguage: true,
             check: true
+        }
+        this.language = ["Русский","Английский","Китайский","Испанский"]
+    }
+
+    openSelectList = () => {
+        this.setState({
+            openSelectList: !this.state.openSelectList
+        })
+    }
+
+    closeSelectList = () => {
+        if(this.state.openSelectList) {
+            this.setState({
+                openSelectList: false
+            })
+        }
+    }
+
+    handlerLanguage = (e) => {
+        this.setState({
+            selectedLanguage: e.currentTarget.innerText
+        })
+        if(this.error.selectedLanguage) {
+            this.error.selectedLanguage = false;
+            this.errorChecking();
         }
     }
 
@@ -41,7 +68,7 @@ class SignIn extends React.Component {
                     name: e.currentTarget.value
                 })
                 error = this.validation.validationName(e.currentTarget.value)
-                this.error.name = error
+                this.error.name = !error
                 this.errorChecking()
                 break;
             case "Номер телефона":
@@ -67,10 +94,16 @@ class SignIn extends React.Component {
         this.errorChecking()
     }
 
+    signIn = () => {
+        if(!this.state.errors) {
+            alert("Вы успешно зарегистрированы")
+        }
+    }
+
     render() {
-        let {name, phone, email, errors} = this.state;
+        let {name, phone, email, errors,openSelectList,selectedLanguage} = this.state;
         return (
-            <div className="wrapper">
+            <div className="wrapper" onClick={this.closeSelectList}>
                 <div className="form-block">
                     <form>
                         <div className="header">
@@ -106,9 +139,28 @@ class SignIn extends React.Component {
                             />
                             <div className="select-block form-block__select-block">
                                 <p>Язык</p>
-                                <div className="select-block__select">
-                                    <div className="text">Язык</div>
+                                <div
+                                    className={`select-block__select select-block__select_selected_${selectedLanguage===""?"false":"true"}`}
+                                    onClick={this.openSelectList}
+                                >
+                                    <div className="text">
+                                        {selectedLanguage === ""? "Язык": selectedLanguage}
+                                    </div>
                                 </div>
+                                {openSelectList?
+                                <div className="select-block__options">
+                                    <ul>
+                                        {this.language.map(item => {
+                                            return <li
+                                                key={this.language.indexOf(item)}
+                                                onClick={this.handlerLanguage}
+                                            >
+                                                {item}
+                                            </li>
+                                        })}
+                                    </ul>
+                                </div> :
+                                    ""}
                             </div>
                             <div className="checkbox-block form-block__checkbox-block">
                                 <input className="checkbox-block__checkbox"
@@ -124,6 +176,7 @@ class SignIn extends React.Component {
                             <div className="button form-block__button">
                                 <button type="button"
                                         className={`button__item button__item_active_${errors?"false":"true"}`}
+                                        onClick={this.signIn}
                                 >
                                     Зарегистрироваться
                                 </button>

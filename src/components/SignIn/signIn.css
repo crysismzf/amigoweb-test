@@ -82,7 +82,6 @@ h1 {
     justify-content: flex-start;
     align-items: center;
     cursor: pointer;
-    color: #c1cadd;
     border: 1px solid #DBE2EA;
     border-radius: 6px;
     font-size: 1rem;
@@ -94,6 +93,15 @@ h1 {
     appearance: none;
     background: url(icon/select.png) calc(550px - 1em) / 5% no-repeat white;
 }
+
+.select-block__select_selected_false {
+    color: #c1cadd;
+}
+
+.select-block__select_selected_true {
+    color: black;
+}
+
 
 .select-block__options {
     width: calc(550px + 2em);
