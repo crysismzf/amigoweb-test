@@ -82,7 +82,6 @@ h1 {
     justify-content: flex-start;
     align-items: center;
     cursor: pointer;
-    border: 1px solid #DBE2EA;
     border-radius: 6px;
     font-size: 1rem;
     padding: 0 1rem;
@@ -92,6 +91,14 @@ h1 {
     -moz-appearance: none;
     appearance: none;
     background: url(icon/select.png) calc(550px - 1em) / 5% no-repeat white;
+}
+
+.select-block__select_open_true {
+    border: 1px solid #0880ae;
+}
+
+.select-block__select_open_false {
+    border: 1px solid #DBE2EA;
 }
 
 .select-block__select_selected_false {
@@ -199,6 +206,10 @@ h1 {
     background: #0880AE;
     color: white;
     cursor: pointer;
+}
+
+.button__item_active_true:hover {
+    border: 1px solid black;
 }
 
 .button__item_active_false {

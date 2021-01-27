@@ -140,7 +140,10 @@ class SignIn extends React.Component {
                             <div className="select-block form-block__select-block">
                                 <p>Язык</p>
                                 <div
-                                    className={`select-block__select select-block__select_selected_${selectedLanguage===""?"false":"true"}`}
+                                    className={`select-block__select 
+                                    select-block__select_selected_${selectedLanguage===""?"false":"true"}
+                                    select-block__select_open_${openSelectList?"true":"false"}
+                                    `}
                                     onClick={this.openSelectList}
                                 >
                                     <div className="text">
