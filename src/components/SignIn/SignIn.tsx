@@ -64,7 +64,7 @@ export class SignIn extends React.Component <Props, FormState, Error> {
         }
     }
 
-    handlerLanguage = (e: any) => {
+    handlerLanguage = (e: React.MouseEvent<HTMLElement>) => {
         this.setState({
             selectedLanguage: e.currentTarget.innerText
         })
@@ -86,7 +86,7 @@ export class SignIn extends React.Component <Props, FormState, Error> {
         })
     }
 
-    handlerInputValue = (e: any, title:string) => {
+    handlerInputValue = (e: React.ChangeEvent<HTMLInputElement>, title:string) => {
         let error;
         switch (title) {
             case "Имя":
