@@ -1,10 +1,36 @@
-import React from "react";
+import * as React from "react";
 import './signIn.css';
 import {Validation} from "../../lib/Validation";
+import {InputTitleBlock} from "./InputTitleBlock";
 
-class SignIn extends React.Component {
-    constructor(props) {
-        super(props);
+type FormState = {
+    name: string,
+    phone: string | number,
+    email: string,
+    selectedLanguage: string,
+    errors: boolean,
+    openSelectList: boolean
+};
+
+interface Error {
+    name: boolean;
+    phone: boolean;
+    email: boolean;
+    selectedLanguage: boolean;
+    check: boolean;
+    [index: string]: boolean;
+}
+
+type Props = {};
+
+export class SignIn extends React.Component <Props, FormState, Error> {
+    validation: any
+    error: Error
+    state: FormState
+    language: Array<string>
+
+    constructor(props :Props) {
+        super(props)
         this.validation = new Validation();
         this.state = {
             name: "",
@@ -38,7 +64,7 @@ class SignIn extends React.Component {
         }
     }
 
-    handlerLanguage = (e) => {
+    handlerLanguage = (e: any) => {
         this.setState({
             selectedLanguage: e.currentTarget.innerText
         })
@@ -60,7 +86,7 @@ class SignIn extends React.Component {
         })
     }
 
-    handlerInputValue = (e,title) => {
+    handlerInputValue = (e: any, title:string) => {
         let error;
         switch (title) {
             case "Имя":
@@ -191,28 +217,3 @@ class SignIn extends React.Component {
         )
     }
 }
-
-function InputTitleBlock (props) {
-    let inputChange = (e) => {
-        props.handlerInputValue(e,props.title);
-    }
-    let error = "";
-    if (props.error) {
-        error = <div className="error">Введено не корректное значение</div>
-    }
-    return (
-        <div className="input-block form-block__input-block">
-            <label>{props.title}</label><br/>
-            <input
-                type={props.type}
-                value={props.value}
-                onChange={inputChange}
-                placeholder={props.placeholder}
-                required
-            />
-            {error}
-        </div>
-    )
-}
-
-export default SignIn;

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import SignIn from "./components/SignIn/SignIn";
+import {SignIn} from "./components/SignIn/SignIn";
 
 
 ReactDOM.render(
